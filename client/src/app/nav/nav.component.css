@@ -1,3 +1,6 @@
 a{
     cursor: pointer;
 }
+a.dropdown-toggle {
+    text-decoration: none;
+ }
