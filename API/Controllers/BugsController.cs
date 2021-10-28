@@ -1,11 +1,11 @@
-using System;
-using API.Data;
-using API.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
 namespace API.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+    using API.Data;
+    using API.Data.Entities;
+
     public class BugsController : BaseApiController
     {
         private readonly ApplicationDbContext context;
@@ -35,12 +35,12 @@ namespace API.Controllers
         [HttpGet("server-error")]
         public ActionResult<string> GetServerError()
         {
-                var thing = this.context.Users.Find(-1);
+            var thing = this.context.Users.Find(-1);
 
-                var thingToReturn = thing.ToString();
+            var thingToReturn = thing.ToString();
 
-                return thingToReturn;
-           
+            return thingToReturn;
+
         }
 
         [HttpGet("bad-request")]

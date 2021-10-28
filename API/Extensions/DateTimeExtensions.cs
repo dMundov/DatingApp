@@ -1,7 +1,7 @@
-using System;
-
 namespace API.Extensions
 {
+    using System;
+
     public static class DateTimeExtensions
     {
         public static int CalculateAge(this DateTime dateOfB)

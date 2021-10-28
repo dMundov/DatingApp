@@ -2,14 +2,13 @@ namespace API.Controllers
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using API.Data;
-    using API.Data.Entities;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     using API.DTos;
     using API.Interfaces;
     using AutoMapper;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
+    
 
     [Authorize]
     public class UsersController : BaseApiController

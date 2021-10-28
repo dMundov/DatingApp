@@ -1,7 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace API.DTos
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class RegisterDto
     {
         [Required]

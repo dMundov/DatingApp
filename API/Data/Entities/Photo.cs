@@ -1,7 +1,7 @@
-using System;
-
 namespace API.Data.Entities
 {
+    using System;
+    
     public class Photo
     {
         public Photo()

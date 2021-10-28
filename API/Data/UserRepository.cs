@@ -1,15 +1,16 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Data.Entities;
-using API.DTos;
-using API.Interfaces;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
-
 namespace API.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+    
+    using API.Data.Entities;
+    using API.DTos;
+    using API.Interfaces;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+    
     public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _context;
@@ -52,9 +53,9 @@ namespace API.Data
 
         public async Task<IEnumerable<MemberDTo>> GetMembersAsync()
         {
-              return await _context.Users
-              .ProjectTo<MemberDTo>(_mapper.ConfigurationProvider)
-              .ToListAsync();
+            return await _context.Users
+            .ProjectTo<MemberDTo>(_mapper.ConfigurationProvider)
+            .ToListAsync();
         }
 
         public async Task<MemberDTo> GetMemberAsync(string username)

@@ -1,15 +1,17 @@
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using API.Data;
-using API.Data.Entities;
-using API.DTos;
-using API.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
 namespace API.Controllers
 {
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    
+    using API.Data;
+    using API.Data.Entities;
+    using API.DTos;
+    using API.Interfaces;
+
+
     public class AccountController : BaseApiController
     {
         private readonly ApplicationDbContext context;
@@ -43,8 +45,8 @@ namespace API.Controllers
 
             return new UserDto
             {
-                UserName= user.UserName,
-                Token=this.tokenService.CreateToken(user)
+                UserName = user.UserName,
+                Token = this.tokenService.CreateToken(user)
             };
         }
 
@@ -65,8 +67,8 @@ namespace API.Controllers
 
             return new UserDto
             {
-                UserName= user.UserName,
-                Token=this.tokenService.CreateToken(user)
+                UserName = user.UserName,
+                Token = this.tokenService.CreateToken(user)
             };
 
         }

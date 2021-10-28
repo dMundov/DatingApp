@@ -3,7 +3,6 @@ namespace API.Data
     using API.Data.Entities;
     using Microsoft.EntityFrameworkCore;
 
-
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
