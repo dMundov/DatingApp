@@ -8,7 +8,7 @@ namespace API.Controllers
     using API.DTos;
     using API.Interfaces;
     using AutoMapper;
-    
+    using System.Security.Claims;
 
     [Authorize]
     public class UsersController : BaseApiController
@@ -33,6 +33,20 @@ namespace API.Controllers
         public async Task<ActionResult<MemberDTo>> GetUser(string username)
         {
             return await _userRepository.GetMemberAsync(username);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
+            var userName = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepository.GetUserByUsernameAsync(userName);
+
+            _mapper.Map(memberUpdateDto, user);
+
+            _userRepository.Update(user);
+            if(await _userRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to update user");
         }
     }
 }
