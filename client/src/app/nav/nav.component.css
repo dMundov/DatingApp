@@ -4,3 +4,9 @@ a{
 a.dropdown-toggle {
     text-decoration: none;
  }
+
+ img{
+     max-height: 35px;
+     border: 2px solid #fff;
+     border-radius: 50px;
+ }
