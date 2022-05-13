@@ -5,6 +5,7 @@ namespace API.Controllers
 
     using API.Data;
     using API.Data.Entities;
+    using System.Linq;
 
     public class BugsController : BaseApiController
     {
@@ -25,7 +26,8 @@ namespace API.Controllers
         [HttpGet("not-found")]
         public ActionResult<AppUser> GetNotFound()
         {
-            var thing = this.context.Users.Find(-1);
+            var thing = this.context.Users
+            .Where(x => x.Id == ".").ToString();
 
             if (thing == null) return NotFound();
 
@@ -35,11 +37,12 @@ namespace API.Controllers
         [HttpGet("server-error")]
         public ActionResult<string> GetServerError()
         {
-            var thing = this.context.Users.Find(-1);
+            var thing = this.context.Users
+            .Where(x => x.Id == ".").ToString();
 
-            var thingToReturn = thing.ToString();
+            //var thingToReturn = thing.ToString();
 
-            return thingToReturn;
+            return thing;
 
         }
 
