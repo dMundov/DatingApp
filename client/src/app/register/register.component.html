@@ -1,48 +1,25 @@
 <form [formGroup]='registerForm' (ngSubmit)="register()" autocomplete="off">
     <h2 class="text-center text-primary">Sign Up</h2>
     <hr>
-    <!-- use $any(....) to fix error TS2739: Type 'AbstractControl' is missing --> 
+    
+    <div class="form-group">
+        <label class="control-label" style="margin-right: 10px;">I am a:</label>
+        <label class="radio-inline">
+            <input type="radio" value="male" formControlName="gender"> Male
+        </label>
+        <label class="radio-inline">
+            <input type="radio" value="female" formControlName="gender" class="ml-3"> Female
+        </label>
+    </div>
+
     <app-text-input [formControl]='registerForm.controls["username"]' [label]='"Username"'></app-text-input>
+    <app-text-input [formControl]='registerForm.controls["knownAs"]' [label]='"Known As"'></app-text-input>
+    <app-date-input [formControl]='registerForm.controls["dateOfBirth"]' [label]='"Date Of Birth"' [maxDate]="maxDate"></app-date-input>
+    <app-text-input [formControl]='registerForm.controls["city"]' [label]='"City"'></app-text-input>
+    <app-text-input [formControl]='registerForm.controls["country"]' [label]='"Country"'></app-text-input>
     <app-text-input [formControl]='registerForm.controls["password"]' [label]='"Password"' [type]='"password"'></app-text-input>
     <app-text-input [formControl]='registerForm.controls["confirmPassword"]'[label]='"Confirm Password"'[type]='"password"'></app-text-input>
-    <!--
-     <div class="form-group">
-        <input [class.is-invalid]='registerForm.get("username")?.errors 
-            && registerForm.get("username")?.touched'
-            type="text" 
-            class="form-control" 
-            formControlName='username' 
-            placeholder="Username">
-        <div class="invalid-feedback">Please enter a username</div>
-    </div>
-    <div class="form-group">
-        <input [class.is-invalid]='registerForm.get("password")?.errors 
-            && registerForm.get("password")?.touched'
-            type="password" 
-            class="form-control" 
-            formControlName='password' 
-            placeholder="Password">
-        <div *ngIf="registerForm.get('password')?.hasError('required')" 
-            class="invalid-feedback">Please enter a password</div>
-        <div *ngIf="registerForm.get('password')?.hasError('minlength')" 
-            class="invalid-feedback">Password must be atleast 4 characters!</div>
-        <div *ngIf="registerForm.get('password')?.hasError('maxlength')" 
-            class="invalid-feedback">Password must be atmost 8 characters!</div>
-    </div>
-    <div class="form-group">
-        <input 
-            [class.is-invalid]='registerForm.get("confirmPassword")?.errors
-            && registerForm.get("confirmPassword")?.touched'
-            type="password" 
-            class="form-control" 
-            formControlName='confirmPassword' 
-            placeholder="Confirm Password">
-        <div *ngIf="registerForm.get('confirmPassword')?.hasError('required')" 
-            class="invalid-feedback">Please enter a confirm password!</div>
-        <div *ngIf="registerForm.get('confirmPassword')?.hasError('isMatching')" 
-            class="invalid-feedback">Confirm password must match password!</div>
-    </div>
-    -->
+    
     <hr>
     <div class="form-group text-center">
         <button class="btn btn-success mr-2 " type="submit">Register</button>
