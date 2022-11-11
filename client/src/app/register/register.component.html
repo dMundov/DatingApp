@@ -1,6 +1,11 @@
 <form [formGroup]='registerForm' (ngSubmit)="register()" autocomplete="off">
     <h2 class="text-center text-primary">Sign Up</h2>
     <hr>
+    <!-- use $any(....) to fix error TS2739: Type 'AbstractControl' is missing --> 
+    <app-text-input [formControl]='registerForm.controls["username"]' [label]='"Username"'></app-text-input>
+    <app-text-input [formControl]='registerForm.controls["password"]' [label]='"Password"' [type]='"password"'></app-text-input>
+    <app-text-input [formControl]='registerForm.controls["confirmPassword"]'[label]='"Confirm Password"'[type]='"password"'></app-text-input>
+    <!--
      <div class="form-group">
         <input [class.is-invalid]='registerForm.get("username")?.errors 
             && registerForm.get("username")?.touched'
@@ -33,15 +38,16 @@
             formControlName='confirmPassword' 
             placeholder="Confirm Password">
         <div *ngIf="registerForm.get('confirmPassword')?.hasError('required')" 
-            class="invalid-feedback">Please enter aconfirm password!</div>
+            class="invalid-feedback">Please enter a confirm password!</div>
         <div *ngIf="registerForm.get('confirmPassword')?.hasError('isMatching')" 
             class="invalid-feedback">Confirm password must match password!</div>
     </div>
+    -->
     <hr>
     <div class="form-group text-center">
         <button class="btn btn-success mr-2 " type="submit">Register</button>
         <button class="btn btn-light mr-2" (click)="cancel()" type="button">Cancel</button>
-    </div>
+    </div> 
 </form>
 <p> Form Value: {{registerForm.value | json}}</p>
 <p> Form Value: {{registerForm.status | json}}</p>
