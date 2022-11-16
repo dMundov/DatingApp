@@ -9,5 +9,5 @@
         [bsConfig]='bsConfig'
         [maxDate]='maxDate'
     >
-    <div *ngif="ngControl.control.errors?.required" class="invalid-feedback">{{labes}} is required</div>
+    <div *ngIf="ngControl.control?.errors?.required" class="invalid-feedback">{{labes}} is required</div>
 </div>

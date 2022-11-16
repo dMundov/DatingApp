@@ -11,16 +11,20 @@ namespace API.Controllers
     using API.DTos;
     using API.Interfaces;
     using System.Linq;
+    using AutoMapper;
 
     public class AccountController : BaseApiController
     {
         private readonly ApplicationDbContext context;
         private readonly ITokenService tokenService;
+        private readonly IMapper mapper;
 
-        public AccountController(ApplicationDbContext context, ITokenService tokenService)
+        public AccountController(ApplicationDbContext context, ITokenService tokenService, IMapper mapper)
         {
+            this.mapper = mapper;
             this.tokenService = tokenService;
             this.context = context;
+
         }
 
         [HttpPost("register")]
@@ -31,14 +35,18 @@ namespace API.Controllers
             {
                 return BadRequest("Username is taken");
             }
+
+            var user = this.mapper.Map<AppUser>(registerDto);
+
+
+
             using HMACSHA512 hmac = new HMACSHA512();
 
-            var user = new AppUser
-            {
-                UserName = registerDto.UserName.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
-            };
+            
+                user.UserName = registerDto.UserName.ToLower();
+                user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+                user.PasswordSalt = hmac.Key;
+            
 
             this.context.Users.Add(user);
             await this.context.SaveChangesAsync();
@@ -46,7 +54,8 @@ namespace API.Controllers
             return new UserDto
             {
                 UserName = user.UserName,
-                Token = this.tokenService.CreateToken(user)
+                Token = this.tokenService.CreateToken(user),
+                KnownAs = user.KnownAs
             };
         }
 
