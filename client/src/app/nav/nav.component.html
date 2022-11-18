@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark  bg-primary">
     <div class="container">
-        <a class="navbar-brand" routerLink='/'>DateME</a>
+        <a class="navbar-brand" *ngIf="accountService.currentUser$|async as user; else notLogedIn" routerLink='/members'>DateME</a>
+        <ng-template #notLogedIn>
+            <a class="navbar-brand" routerLink="/">DateME</a>
+        </ng-template>
         <ul class="navbar-nav mr-auto" >
             <ng-container *ngIf='accountService.currentUser$|async'>
                 <li class="nav-item">
