@@ -13,6 +13,7 @@ namespace API.Controllers
     using API.Extensions;
     using API.Data.Entities;
     using System.Linq;
+    using API.Helpers;
 
     [Authorize]
     public class UsersController : BaseApiController
@@ -29,9 +30,11 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDTo>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDTo>>> GetUsers([FromQuery]UserParams userParams)
         {
-            var users = await _userRepository.GetMembersAsync();
+            var users = await _userRepository.GetMembersAsync(userParams);
+
+            Response.AddPaginationHeader(users.CurrentPage,users.PageSize, users.TotalCount,users.TotalPages);
             return Ok(users);
         }
 

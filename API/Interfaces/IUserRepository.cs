@@ -5,6 +5,7 @@ namespace API.Interfaces
     
     using API.Data.Entities;
     using API.DTos;
+    using API.Helpers;
 
     public interface IUserRepository
     {
@@ -14,7 +15,7 @@ namespace API.Interfaces
         Task<IEnumerable<AppUser>> GetUsersAsync();
         Task<AppUser> GetUserByIdAsync(string id);
         Task<AppUser> GetUserByUsernameAsync(string username);
-        Task<IEnumerable<MemberDTo>> GetMembersAsync();
+        Task<PagedList<MemberDTo>> GetMembersAsync(UserParams userParams);
         Task<MemberDTo> GetMemberAsync(string username);
 
     }

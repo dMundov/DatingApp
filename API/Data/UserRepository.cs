@@ -10,7 +10,8 @@ namespace API.Data
     using API.Interfaces;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-    
+    using API.Helpers;
+
     public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _context;
@@ -51,11 +52,14 @@ namespace API.Data
             _context.Entry(user).State = EntityState.Modified;
         }
 
-        public async Task<IEnumerable<MemberDTo>> GetMembersAsync()
+        public async Task<PagedList<MemberDTo>> GetMembersAsync(UserParams userParams)
         {
-            return await _context.Users
+            var query = _context.Users
             .ProjectTo<MemberDTo>(_mapper.ConfigurationProvider)
-            .ToListAsync();
+            .AsNoTracking();
+
+            return await PagedList<MemberDTo>.CreateAsync(query , userParams.PageNumber,userParams.PageSize);
+
         }
 
         public async Task<MemberDTo> GetMemberAsync(string username)
