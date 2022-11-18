@@ -40,8 +40,6 @@ namespace API.Controllers
             var thing = this.context.Users
             .Where(x => x.Id == ".").ToString();
 
-            //var thingToReturn = thing.ToString();
-
             return thing;
 
         }
