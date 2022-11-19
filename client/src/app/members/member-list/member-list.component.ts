@@ -10,10 +10,10 @@ import { MembersService } from 'src/app/_services/members.service';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  members:Member[];
-  pagination:Pagination;
-  pageNumber=1;
-  pageSize=5;
+  members: Member[];
+  pagination: Pagination;
+  pageNumber = 1;
+  pageSize = 5;
 
   constructor(private memberservice: MembersService) { }
 
@@ -21,15 +21,14 @@ export class MemberListComponent implements OnInit {
     this.loadMembers();
   }
 
-  loadMembers(){
-    this.memberservice.getMembers(this.pageNumber,this.pageSize).subscribe(response=>{
-      this.members=response.results;
-      this.pagination=response.pagination;
+  loadMembers() {
+    this.memberservice.getMembers(this.pageNumber, this.pageSize).subscribe(response => {
+      this.members = response.results;
+      this.pagination = response.pagination;
     })
   }
 
-
-  pageChanged(event:any){
+  pageChanged(event: any) {
     this.pageNumber = event.page;
     this.loadMembers();
   }
