@@ -1,4 +1,4 @@
-import { Photo } from "./Photo";
+import * as Photo from "./Photo";
 
 export interface Member {
     id: string;
@@ -14,7 +14,7 @@ export interface Member {
     interests: string;
     city: string;
     country: string;
-    photos: Photo[];
+    photos: Photo.Photo[];
 }
 
 

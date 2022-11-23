@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
+import { User } from 'src/app/_models/user';
+import { UserParams } from 'src/app/_models/userParams';
+import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
@@ -12,24 +16,45 @@ import { MembersService } from 'src/app/_services/members.service';
 export class MemberListComponent implements OnInit {
   members: Member[];
   pagination: Pagination;
-  pageNumber = 1;
-  pageSize = 5;
+  userParams: UserParams;
+  genderList = [{ value: "male", display: "Males" }, { value: "female", display: "Females" }];
 
-  constructor(private memberservice: MembersService) { }
+  constructor(private memberService: MembersService) {
+    /*this.accountServise.currentUser$.pipe(take(1)).subscribe(user=>{
+      this.user=user;
+      this.userParams=new UserParams(user);
+    })*/
+    this.userParams = this.memberService.getUserParams() as any;
+  }
 
   ngOnInit(): void {
     this.loadMembers();
   }
 
   loadMembers() {
-    this.memberservice.getMembers(this.pageNumber, this.pageSize).subscribe(response => {
-      this.members = response.results;
-      this.pagination = response.pagination;
-    })
+    if (this.userParams) {
+      this.memberService.setUserParams(this.userParams);
+      this.memberService.getMembers(this.userParams).subscribe({
+        next: response => {
+          if (response.results && response.pagination) {
+            this.members = response.results;
+            this.pagination = response.pagination;
+          }
+        }
+      })
+    }
+  }
+
+  resetFilters() {
+      this.userParams = this.memberService.resetUserParams() as any;
+      this.loadMembers();  
   }
 
   pageChanged(event: any) {
-    this.pageNumber = event.page;
-    this.loadMembers();
+    if (this.userParams && this.userParams?.pageNumber !== event.page) {
+      this.userParams.pageNumber = event.page;
+      this.memberService.setUserParams(this.userParams);
+      this.loadMembers();
+    }
   }
 }
