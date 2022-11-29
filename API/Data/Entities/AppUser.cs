@@ -25,5 +25,8 @@ namespace API.Data.Entities
         public string City { get; set; }
         public string Country { get; set; }
         public virtual ICollection<Photo> Photos { get; set; } = new HashSet<Photo>();
+
+        public virtual List<UserLike> LikedByUser { get; set; }
+        public virtual List<UserLike> LikedUsers { get; set; }
     }
 }
