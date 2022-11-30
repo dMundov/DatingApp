@@ -5,13 +5,13 @@ namespace API.Controllers
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    
+
     using API.Data;
-    using API.Data.Entities;
     using API.DTos;
     using API.Interfaces;
     using System.Linq;
     using AutoMapper;
+    using API.Data.Entities;
 
     public class AccountController : BaseApiController
     {

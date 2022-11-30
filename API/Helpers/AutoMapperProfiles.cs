@@ -2,10 +2,9 @@ namespace API.Helpers
 {
     using System.Linq;
     using AutoMapper;
-    
-    using API.Data.Entities;
     using API.DTos;
     using API.Extensions;
+    using API.Data.Entities;
 
     public class AutoMapperProfiles : Profile
     {
@@ -19,6 +18,11 @@ namespace API.Helpers
             CreateMap<Photo, PhotoDto>();
             CreateMap<MemberUpdateDto,AppUser>();
             CreateMap<RegisterDto,AppUser>();
+            CreateMap<Message,MessageDto>()
+            .ForMember(d=>d.SenderPhotoUrl,o=>o.MapFrom(s=>s.Sender.Photos
+                .FirstOrDefault(x=>x.IsMain).Url))
+            .ForMember(d=>d.RecipientPhotoUrl,o=>o.MapFrom(s=>s.Sender.Photos
+                .FirstOrDefault(x=>x.IsMain).Url));
         }
     }
 }

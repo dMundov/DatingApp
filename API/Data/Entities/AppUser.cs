@@ -3,6 +3,7 @@ namespace API.Data.Entities
     using System;
     using System.Collections.Generic;
 
+
     public class AppUser
     {
         public AppUser()
@@ -28,5 +29,8 @@ namespace API.Data.Entities
 
         public virtual List<UserLike> LikedByUser { get; set; }
         public virtual List<UserLike> LikedUsers { get; set; }
+        
+        public virtual List<Message> MessagesSent { get; set; }
+        public virtual List<Message> MessagesReceived { get; set; }
     }
 }
