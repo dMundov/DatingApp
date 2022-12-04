@@ -62,7 +62,7 @@
                     </div>
                 </td>
                 <td>
-                    {{message.messageSent | timeago}}
+                    {{message.messageSent + 'Z' | timeago}}
                 </td>
                 <td>
                     <button class="btn btn-danger">Delete</button>
@@ -71,7 +71,7 @@
         </tbody>
     </table>
 </div>
-<div class="d-flex justify-content-center" *ngIf="pagination && messages?.length> 0">
+<div class="d-flex justify-content-center" *ngIf="!loading && pagination && messages?.length> 0">
     <pagination [boundaryLinks]="true" 
         [totalItems]="pagination.totalItems" 
         [itemsPerPage]="pagination.itemsPerPage"
