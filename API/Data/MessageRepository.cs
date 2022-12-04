@@ -49,7 +49,7 @@ namespace API.Data
             switch 
             {
                 "Inbox" => query.Where(u=>u.RecipientUserName == messageParams.UserName),
-                "Outbox" => query.Where(u=>u.SenderUserName== messageParams.UserName),
+                "Outbox" => query.Where(u=>u.SenderUserName == messageParams.UserName),
                 
                 _ => query.Where(u=>u.RecipientUserName== messageParams.UserName && u.DateRead == null)
             };
@@ -68,11 +68,11 @@ namespace API.Data
                 .Include(u=>u.Recipient).ThenInclude(p=>p.Photos)
                 .Where(
                     m=>m.RecipientUserName==currentUserName && 
-                    m.SenderUserName==recipientUserName ||
+                    m.SenderUserName == recipientUserName ||
                     m.RecipientUserName==recipientUserName &&
                     m.SenderUserName==currentUserName
                 )
-                .OrderByDescending(m=>m.MessageSent)
+                .OrderBy(m=>m.MessageSent)
                 .ToListAsync();
 
             var unreadMessages = messages.Where(m=>m.DateRead == null  
