@@ -22,7 +22,7 @@ namespace API.Data
             var roles = new List<AppRole>
             {
                 new AppRole{Name = "Member"},
-                new AppRole{Name = "Admin "},
+                new AppRole{Name = "Admin"},
                 new AppRole{Name = "Moderator"},
             };
 
