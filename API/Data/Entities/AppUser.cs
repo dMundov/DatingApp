@@ -2,19 +2,14 @@ namespace API.Data.Entities
 {
     using System;
     using System.Collections.Generic;
+    using Microsoft.AspNetCore.Identity;
 
-
-    public class AppUser
+    public class AppUser: IdentityUser
     {
         public AppUser()
         {
             this.Id = Guid.NewGuid().ToString();
         }
-
-        public string Id { get; set; }
-        public string UserName { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string KnownAs { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
@@ -32,5 +27,7 @@ namespace API.Data.Entities
         
         public virtual List<Message> MessagesSent { get; set; }
         public virtual List<Message> MessagesReceived { get; set; }
+
+        public virtual ICollection<AppUserRole> UserRoles { get; set; } = new HashSet<AppUserRole>();
     }
 }

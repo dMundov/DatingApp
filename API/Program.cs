@@ -9,7 +9,9 @@ namespace API
     using Microsoft.Extensions.Logging;
 
     using API.Data;
-    
+    using Microsoft.AspNetCore.Identity;
+    using API.Data.Entities;
+
     public class Program
     {
         public static async Task Main(string[] args)
@@ -22,8 +24,9 @@ namespace API
             try
             {
                 var context = services.GetRequiredService<ApplicationDbContext>();
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 await context.Database.MigrateAsync();
-                await Seed.SeedUsers(context);
+                await Seed.SeedUsers(userManager);
             }
             catch (Exception ex)
             {
