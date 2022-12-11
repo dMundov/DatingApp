@@ -4,9 +4,9 @@ import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 
 @Directive({
-  selector: '[appHasRole]' // **appHasRole='["Admin","etc"]'
+  selector: '[appHasRole]' // *appHasRole='["Admin","etc.."]'
 })
-export class HasRoleDirective implements OnInit{
+export class HasRoleDirective implements OnInit {
   @Input() appHasRole: string[] = [];
   user: User = {} as User;
 
@@ -14,14 +14,14 @@ export class HasRoleDirective implements OnInit{
     private accountService: AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => {
-        if(user) this.user= user;
+        if (user) this.user = user;
       }
     })
   }
   ngOnInit(): void {
-    if(this.user.roles.some(r=> this.appHasRole.includes(r))){
+    if (this.user.roles.some(r => this.appHasRole.includes(r))) {
       this.viewContainerRef.createEmbeddedView(this.templateRef);
-    }else{
+    } else {
       this.viewContainerRef.clear();
     }
 
