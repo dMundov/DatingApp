@@ -1,15 +1,15 @@
 namespace API.Controllers
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Threading.Tasks;
+    using AutoMapper;
+    using Microsoft.AspNetCore.Mvc;
+    
     using API.Data.Entities;
     using API.DTos;
     using API.Extensions;
     using API.Helpers;
     using API.Interfaces;
-    using AutoMapper;
-    using Microsoft.AspNetCore.Mvc;
 
     public class MessagesController : BaseApiController
     {
@@ -51,7 +51,7 @@ namespace API.Controllers
 
             if(await _messageRepository.SaveAllAsync()) return Ok(_mapper.Map<MessageDto>(message));
 
-            return BadRequest("Faile to send Message!");
+            return BadRequest("Fail to send Message!");
 
         }
 
