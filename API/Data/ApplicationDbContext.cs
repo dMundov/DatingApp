@@ -4,11 +4,11 @@ namespace API.Data
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    
-    public class ApplicationDbContext : IdentityDbContext<AppUser,AppRole,string,
+
+    public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string,
     IdentityUserClaim<string>, AppUserRole, IdentityUserLogin<string>,
     IdentityRoleClaim<string>, IdentityUserToken<string>>
-        
+
     {
         public ApplicationDbContext()
         {
@@ -25,21 +25,25 @@ namespace API.Data
 
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<Group> Groups { get; set; }
 
-        
+        public DbSet<Connection> Connections { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<AppUser>()
-                .HasMany(ur=>ur.UserRoles)
-                .WithOne(u=>u.User)
-                .HasForeignKey(ur=>ur.UserId);
-                
+                .HasMany(ur => ur.UserRoles)
+                .WithOne(u => u.User)
+                .HasForeignKey(ur => ur.UserId);
+
             builder.Entity<AppRole>()
-                .HasMany(ur=>ur.UserRoles)
-                .WithOne(u=>u.Role)
-                .HasForeignKey(ur=>ur.RoleId);
+                .HasMany(ur => ur.UserRoles)
+                .WithOne(u => u.Role)
+                .HasForeignKey(ur => ur.RoleId);
 
             //Many-to-Many table setup
             builder.Entity<UserLike>()
@@ -58,13 +62,13 @@ namespace API.Data
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Message>()
-                .HasOne(u=>u.Recipient)
-                .WithMany(m=>m.MessagesReceived)
+                .HasOne(u => u.Recipient)
+                .WithMany(m => m.MessagesReceived)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Message>()
-                .HasOne(u=>u.Sender)
-                .WithMany(m=>m.MessagesSent)
+                .HasOne(u => u.Sender)
+                .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
 
 
