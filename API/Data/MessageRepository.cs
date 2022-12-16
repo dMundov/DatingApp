@@ -104,6 +104,7 @@ namespace API.Data
                 {
                     message.DateRead = DateTime.UtcNow;
                 }
+                
                 await _context.SaveChangesAsync();
             }
 
