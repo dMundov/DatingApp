@@ -18,13 +18,13 @@ export class AccountService {
 
   constructor(private http: HttpClient, private presenceService: PresenceService) { }
 
-  login(model: User | null) {
+  login(model: User) {
     return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
         const user = response;
         if (user) {
-          this.setCurrentUser(user);
           this.isLoggedIn=true;
+          this.setCurrentUser(user);
         }
       })
     )
