@@ -71,7 +71,7 @@ namespace API.Data
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
+            builder.Entity<Photo>().HasQueryFilter(p=>p.isApproved);
         }
     }
 }

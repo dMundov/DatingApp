@@ -9,6 +9,7 @@ namespace API.Data
 
     using API.Data.Entities;
     using Microsoft.AspNetCore.Identity;
+    using System.Linq;
 
     public class Seed
     {
@@ -33,6 +34,7 @@ namespace API.Data
 
             foreach (var user in users)
             {
+                user.Photos.First().isApproved = true;
                 user.UserName = user.UserName.ToLower();
                 await userManager.CreateAsync(user, "633Ds725");
                 await userManager.AddToRoleAsync(user, "Member");

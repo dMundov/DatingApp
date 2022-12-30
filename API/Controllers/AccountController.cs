@@ -57,6 +57,7 @@ namespace API.Controllers
                 KnownAs = user.KnownAs,
                 Gender = user.Gender
             };
+            
         }
 
         [HttpPost("login")]
