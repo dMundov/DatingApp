@@ -26,7 +26,10 @@
             </li>
         </ul>
         <div class="dropdown" *ngIf="(accountService.currentUser$|async) as user" dropdown>
-            <img src="{{user.photoUrl||'./assets/user.png'}}" alt="{{user.userName}}">
+            <img *ngIf="(user.gender === 'male'); else femaleImg"  src="{{user.photoUrl||'./assets/default_male_user.png'}}" alt="{{user.userName}}">
+            <ng-template #femaleImg>
+                <img src="{{user.photoUrl||'./assets/default_female_user.png'}}" alt="{{user.userName}}">
+            </ng-template>
             <a class="dropdown-toggle text-light ml-2" dropdownToggle>Welcome {{user.knownAs || user.username | titlecase}}</a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
                 <a routerLink='/member/edit' class="dropdown-item">Edit Profile</a>

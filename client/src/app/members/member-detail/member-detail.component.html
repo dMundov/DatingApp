@@ -1,8 +1,12 @@
 <div class="row">
     <div class="col-4">
         <div class="card">
-            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}"
+            <img *ngIf="(member.gender==='male'); else femaleImg" src="{{member.photoUrl || './assets/default_male_user.png'}}" alt="{{member.knownAs}}"
                 class="card-img-top img-thumbnail">
+            <ng-template #femaleImg>
+                <img src="{{member.photoUrl || './assets/default_female_user.png'}}" alt="{{member.knownAs}}"
+                class="card-img-top img-thumbnail">
+            </ng-template>
             <div class="card-body">
                 <div class="mg-2" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.username)">
                     <i class="class fa fa-user-circle text-success"></i> Online Now

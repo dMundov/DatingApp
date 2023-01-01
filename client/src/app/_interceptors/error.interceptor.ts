@@ -32,7 +32,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 throw modalStateErrors.flat();
               } else if (typeof (error.error) === 'object') {
                 for (const key of Object.keys(error.error)) {  
-                  //TODO:  to find a way to do this with automation method...not hardcoded..bad practice for it!
+                  //TODO:  to find a way to do this with better way...!
                   this.toastr.error(JSON.stringify(error.error[key].description))
               }
                 
